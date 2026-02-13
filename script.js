@@ -80,39 +80,37 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => heartEl.remove(), 2000);
     }
 
-    // --- NEW: Background Floating Hearts ---
+    // --- Background Floating Hearts ---
     const redShades = [
-        'rgba(255, 77, 109, 0.4)',
-        'rgba(201, 24, 74, 0.5)',
-        'rgba(255, 117, 143, 0.4)',
-        'rgba(255, 0, 50, 0.3)'
+        'rgba(185, 14, 54, 0.6)',
+        'rgba(154, 3, 30, 0.5)',
+        'rgba(128, 0, 0, 0.4)',
+        'rgba(201, 24, 74, 0.6)',
+        '#800000'
     ];
+
+    const isMobile = window.innerWidth <= 768;
 
     function spawnBGHeart() {
         const bgHeart = document.createElement('div');
         bgHeart.className = 'floating-bg-heart';
         bgHeart.innerText = '❤';
 
-        // Random start position
         const startX = Math.random() * window.innerWidth;
         const startY = window.innerHeight + 50;
 
         bgHeart.style.left = `${startX}px`;
         bgHeart.style.top = `${startY}px`;
 
-        // Random Red Shade
         bgHeart.style.color = redShades[Math.floor(Math.random() * redShades.length)];
 
-        // Random size
-        const size = 15 + Math.random() * 45;
+        const size = isMobile ? (10 + Math.random() * 30) : (15 + Math.random() * 55);
         bgHeart.style.fontSize = `${size}px`;
 
-        // Random drift duration 10-20s
-        const duration = 8 + Math.random() * 8; // Slightly faster drift
+        const duration = isMobile ? (8 + Math.random() * 12) : (6 + Math.random() * 10);
         bgHeart.style.animationDuration = `${duration}s`;
 
-        // Drift properties
-        const dx = (Math.random() - 0.5) * 250;
+        const dx = (Math.random() - 0.5) * (isMobile ? 150 : 300);
         const dy = -(window.innerHeight + 150);
         const dr = (Math.random() - 0.5) * 720;
 
@@ -121,15 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
         bgHeart.style.setProperty('--dr', `${dr}deg`);
 
         body.appendChild(bgHeart);
-
         setTimeout(() => bgHeart.remove(), duration * 1000);
     }
 
-    // Spawn EXTREMELY frequently (every 20ms) for total heart saturation
-    setInterval(spawnBGHeart, 20);
+    // Adjust density based on device
+    const spawnInterval = isMobile ? 300 : 20; // Slower on mobile for professionalism
+    setInterval(spawnBGHeart, spawnInterval);
 
-    // Initial massive batch to instantly flood the screen
-    for (let i = 0; i < 200; i++) {
-        setTimeout(spawnBGHeart, Math.random() * 1000);
+    const initialCount = isMobile ? 30 : 200;
+    for (let i = 0; i < initialCount; i++) {
+        setTimeout(spawnBGHeart, Math.random() * (isMobile ? 5000 : 1000));
     }
 });
