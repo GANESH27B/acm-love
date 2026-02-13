@@ -49,12 +49,58 @@ body {
     padding: 3rem;
     max-width: 600px;
     width: 90%;
+    margin: 20px auto;
     text-align: center;
     box-shadow: 0 0 30px rgba(255, 77, 109, 0.2), 0 25px 45px rgba(0, 0, 0, 0.1);
     z-index: 10;
     animation: fadeIn 1.5s ease-out;
     position: relative;
     overflow: hidden;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .glass-container {
+        padding: 2rem 1.5rem;
+        width: 95%;
+        border-radius: 20px;
+    }
+
+    .romantic-title {
+        font-size: 2.5rem;
+    }
+
+    .romantic-text {
+        font-size: 1.2rem;
+    }
+
+    .sub-text {
+        font-size: 1rem;
+    }
+
+    .acm-banner {
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .main-heart {
+        font-size: 3rem;
+    }
+
+    .moving-heart {
+        font-size: 16px;
+        /* Smaller hearts on mobile */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .romantic-title {
+        font-size: 2rem;
+    }
+
+    .glass-container {
+        padding: 1.5rem 1rem;
+    }
 }
 
 /* Animated Circuit Lines */

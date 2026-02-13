@@ -35,6 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Track touch move for mobile devices
+    window.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const x = touch.clientX;
+        const y = touch.clientY;
+
+        const dist = Math.hypot(x - lastX, y - lastY);
+
+        if (dist > distanceThreshold) {
+            spawnHeart(x, y);
+            lastX = x;
+            lastY = y;
+        }
+    });
+
     // Handle click on button (only if it exists)
     if (loveBtn) {
         loveBtn.addEventListener('click', (e) => {
@@ -110,11 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => bgHeart.remove(), duration * 1000);
     }
 
-    // Spawn much more frequently (every 300ms) for a full screen effect
-    setInterval(spawnBGHeart, 300);
+    // Spawn EXTREMELY frequently (every 20ms) for total heart saturation
+    setInterval(spawnBGHeart, 20);
 
-    // Initial large batch to fill screen immediately
-    for (let i = 0; i < 30; i++) {
-        setTimeout(spawnBGHeart, Math.random() * 5000);
+    // Initial massive batch to instantly flood the screen
+    for (let i = 0; i < 200; i++) {
+        setTimeout(spawnBGHeart, Math.random() * 1000);
     }
 });
